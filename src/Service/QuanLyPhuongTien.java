@@ -1,5 +1,6 @@
 package Service;
 
+import Main.Menu;
 import object.Oto;
 import object.PhuongTien;
 import object.XeMay;
@@ -10,6 +11,7 @@ import java.util.Scanner;
 
 import docGhiFile.DocGhiFile;
 import taiKhoan.QuanLyTaiKhoan;
+import taiKhoan.TaiKhoan;
 
 public class QuanLyPhuongTien {
 
@@ -49,7 +51,7 @@ public class QuanLyPhuongTien {
 
     // Tạo thêm Oto mới
     private Oto taoOto() {
-        KiemTraDuLieuDauVao kiemTraDuLieuDauVao = new KiemTraDuLieuDauVao();
+
 
         System.out.println("Nhập hãng Oto:");
         String hangXe = input.nextLine();
@@ -61,7 +63,7 @@ public class QuanLyPhuongTien {
         String mau = input.nextLine();
         System.out.println("Nhập biển số xe Oto:");
         String bienSoXe = input.nextLine();
-        kiemTraDuLieuDauVao.kiemTraKieuDuLieu(bienSoXe);
+
         int bienDem = 0;
         while (kiemTraBienSoXe(bienSoXe)) {
             System.out.println("Biển số xe bị trùng");
@@ -169,7 +171,7 @@ public class QuanLyPhuongTien {
         System.out.println("Nhập vào động cơ của Oto");
         String dongCo = input.nextLine();
         oto.setDongCo(dongCo);
-        quanLyOto.capNhap(oto);
+        docGhiFile.ghiFileOto(quanLyOto.getOtos());
 
     }
 
@@ -190,7 +192,7 @@ public class QuanLyPhuongTien {
         System.out.println("Nhập vào động cơ của xe máy");
         String congSuat = input.nextLine();
         xeMay.setCongSuat(congSuat);
-        quanLyXeMay.capNhap(xeMay);
+        docGhiFile.ghiXeMay(quanLyXeMay.getXeMays());
     }
 
     //cập nhập thông tin Xe máy theo biển số xe
@@ -207,61 +209,54 @@ public class QuanLyPhuongTien {
         System.out.println("Nhập biển số xe xe tải:");
         String bienSoXe = input.nextLine();
         xeTai.setBienSoXe(bienSoXe);
-        System.out.println("Nhập vào động cơ của xe tải");
+        System.out.println("Nhập vào tải trọng của xe tải");
         String taiTrong = input.nextLine();
         xeTai.setTaiTrong(taiTrong);
-        quanLyXeTai.capNhap(xeTai);
+        docGhiFile.ghiXeTai(quanLyXeTai.getXeTais());
     }
 
     //     Xóa phương tiện Oto
     public Oto xoaOtoTheoBienSo() {
+        Menu menu = new Menu();
         hienthiOto();
         System.out.println("Nhập biển số oto cần xóa: ");
         String bienSoXe = input.nextLine();
         for (Oto oto : quanLyOto.getOtos()) {
             if (oto.getBienSoXe().equals(bienSoXe)) {
                 System.out.println("Bạn có chắc chắn muốn xóa không:");
+                menu.menuXoa();
                 int chon;
-//                do {
-                    chon = Integer.parseInt(input.nextLine());
-                    switch (chon) {
-                        case 1:
-                            System.out.println("Có");
-                            quanLyOto.xoaTheoBienSoXe(bienSoXe);
-                            break;
-                        case 2:
-                            System.out.println("Không");
-                            break;
-                    }
-//                } while (chon != 0);
+                chon = Integer.parseInt(input.nextLine());
+
+                if (chon == 1) {
+                    quanLyOto.xoaTheoBienSoXe(bienSoXe);
+                    break;
+                }
+                    break;
             }
+            docGhiFile.ghiFileOto(quanLyOto.getOtos());
         }
         return null;
     }
 
     // Xóa phương tiện Xe máy
     public XeMay xoaXeMayTheoBienSo() {
+        Menu menu = new Menu();
         hienThiXeMay();
-        String bienSoXe;
         System.out.println("Nhập biển số xe máy cần xóa: ");
-        bienSoXe = input.nextLine();
+        String bienSoXe = input.nextLine();
         for (XeMay xeMay : quanLyXeMay.getXeMays()) {
             if (xeMay.getBienSoXe().equals(bienSoXe)) {
                 System.out.println("Bạn có chắc chắn muốn xóa không");
-                int chon;
-                do {
-                    chon = Integer.parseInt(input.nextLine());
-                    switch (chon) {
-                        case 1:
-                            System.out.println("Có");
-                            quanLyXeMay.getXeMays().remove(xeMay);
-                            break;
-                        case 2:
-                            System.out.println("Không");
-                            break;
-                    }
-                } while (chon != 0);
+                menu.menuXoa();
+                int chon = Integer.parseInt(input.nextLine());
+                if (chon == 1) {
+                    quanLyXeMay.xoaTheoBienSoXe(bienSoXe);
+                    break;
+                }
+                break;
             }
+            docGhiFile.ghiXeMay(quanLyXeMay.getXeMays());
         }
         return null;
     }
@@ -269,42 +264,34 @@ public class QuanLyPhuongTien {
     // Xóa phương tiện Xe tải
     public XeTai xoaXeTaiTheoBienSo() {
         hienThiXeTai();
-        String bienSoXe;
+        Menu menu = new Menu();
         System.out.println("Nhập biển số xe tải cần xóa: ");
-        bienSoXe = input.nextLine();
+        String bienSoXe = input.nextLine();
         for (XeTai xeTai : quanLyXeTai.getXeTais()) {
             if (xeTai.getBienSoXe().equals(bienSoXe)) {
                 System.out.println("Bạn có chắc chắn muốn xóa không");
-                int chon = 0;
-                do {
-                    switch (chon) {
-                        case 1:
-                            System.out.println("Có");
-                            quanLyXeTai.xoaTheoBienSoXe(bienSoXe);
-                            break;
-                        case 2:
-                            System.out.println("Không");
-                            break;
-                    }
-                } while (chon != 0);
+                menu.menuXoa();
+                int chon = Integer.parseInt(input.nextLine());
+                if (chon == 1) {
+                    quanLyXeTai.xoaTheoBienSoXe(bienSoXe);
+                    break;
+                }
+                break;
             }
+            docGhiFile.ghiXeTai(quanLyXeTai.getXeTais());
         }
         return null;
     }
 
     // Hiển thị tất cả các phương tiện
     public void hienThiPhuongTien() {
-
         hienthiOto();
         hienThiXeMay();
         hienThiXeTai();
-
     }
 
     // Hiển thị phương tiện Oto
     public void hienthiOto() {
-
-
         quanLyOto.hienThiTatCa();
     }
 
@@ -320,13 +307,12 @@ public class QuanLyPhuongTien {
     }
 
     public Oto timKiemOto() {
-        KiemTraDuLieuDauVao kiemTraDuLieuDauVao = new KiemTraDuLieuDauVao();
         String bienKiemSoat;
         System.out.println("Nhập biển số xe:");
         bienKiemSoat = input.nextLine();
-        kiemTraDuLieuDauVao.kiemTraKieuDuLieu(bienKiemSoat);
         for (Oto oto : quanLyOto.getOtos()) {
             if (oto.getBienSoXe().equals(bienKiemSoat)) {
+                System.out.println(oto);
                 return oto;
             }
         }
@@ -339,6 +325,7 @@ public class QuanLyPhuongTien {
         biemKiemSoat = input.nextLine();
         for (XeMay xeMay : quanLyXeMay.getXeMays()) {
             if (xeMay.getBienSoXe().equals(biemKiemSoat)) {
+                System.out.println(xeMay);
                 return xeMay;
             }
         }
@@ -351,6 +338,7 @@ public class QuanLyPhuongTien {
         bienKiemsoat = input.nextLine();
         for (XeTai xeTai : quanLyXeTai.getXeTais()) {
             if (xeTai.getBienSoXe().equals(bienKiemsoat)) {
+                System.out.println(xeTai);
                 return xeTai;
             }
         }
@@ -358,10 +346,9 @@ public class QuanLyPhuongTien {
     }
 
     public void hienThiCaNhan() {
-        QuanLyTaiKhoan quanLyTaiKhoan = new QuanLyTaiKhoan();
-        for (PhuongTien pt :
-                phuongTiens) {
-            if (pt.getBienSoXe().equals(quanLyTaiKhoan.taoTaiKhoan().getBienSoXe())) {
+        TaiKhoan taiKhoan = new TaiKhoan();
+        for (PhuongTien pt : phuongTiens) {
+            if (pt.getBienSoXe().equals(taiKhoan.getBienSoXe())) {
                 System.out.println(pt);
             }
         }

@@ -2,11 +2,11 @@ package Main;
 
 import Service.QuanLyPhuongTien;
 import object.Oto;
-import object.PhuongTien;
+
 import object.XeMay;
 import object.XeTai;
 import taiKhoan.QuanLyTaiKhoan;
-import docGhiFile.DocGhiFile;
+
 
 import java.util.Scanner;
 
@@ -160,8 +160,8 @@ public class Menu {
             System.out.println("|                                                                     |");
             System.out.println("|                         3. Xe Tải                                   |");
             System.out.println("|                                                                     |");
-            System.out.println("|                         4. Khác                                     |");
-            System.out.println("|                                                                     |");
+//            System.out.println("|                         4. Khác                                     |");
+//            System.out.println("|                                                                     |");
             System.out.println("|                         0. Thoát trương trình                       |");
             System.out.println("-----------------------------------------------------------------------");
             chon = Integer.parseInt(input.nextLine());
@@ -175,44 +175,9 @@ public class Menu {
                 case 3:
                     quanLyPhuongTien.timKiemXeTai();
                     break;
-                case 4:
-                    menuKhac();
-                    break;
-            }
-
-        } while (chon != 0);
-    }
-
-
-    public void menuKhac() {
-        int chon;
-        do {
-            System.out.println("-------------------------------KHAC------------------------------------");
-            System.out.println("|                                                                     |");
-            System.out.println("|                         1. Oto                             |");
-            System.out.println("|                                                                     |");
-            System.out.println("|                         2. Xe Máy                                   |");
-            System.out.println("|                                                                     |");
-            System.out.println("|                         3. Xe Tải                                   |");
-            System.out.println("|                                                                     |");
-            System.out.println("|                         4. Khác                                     |");
-            System.out.println("|                                                                     |");
-            System.out.println("|                         0. Thoát trương trình                       |");
-            System.out.println("-----------------------------------------------------------------------");
-            chon = Integer.parseInt(input.nextLine());
-            switch (chon) {
-                case 1:
-                    quanLyPhuongTien.timKiemOto();
-                    break;
-                case 2:
-                    quanLyPhuongTien.timKiemXeMay();
-                    break;
-                case 3:
-                    quanLyPhuongTien.timKiemXeTai();
-                    break;
-                case 4:
-//                    quanLyPhuongTien.timKiemXeTai();
-                    break;
+//                case 4:
+//                    menuKhac();
+//                    break;
             }
 
         } while (chon != 0);
@@ -305,5 +270,14 @@ public class Menu {
 
         } while (chon != 0);
     }
+
+    public void menuXoa() {
+        System.out.println("------------------------------------------");
+        System.out.println("|                1. Có                   |");
+        System.out.println("|                                        |");
+        System.out.println("|                2. Không                |");
+        System.out.println("------------------------------------------");
+    }
+
 
 }

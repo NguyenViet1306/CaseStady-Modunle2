@@ -75,12 +75,12 @@ public class QuanLyTaiKhoan {
 
     public void dangNhapTaiKhoan() {
         QuanLyPhuongTien quanLyPhuongTien = new QuanLyPhuongTien();
-//        Menu menu = new Menu();
+        docGhiFile.docTaiKhoan();
         System.out.println("Nhập tài khoản cá nhân:");
         String taiKhoanCaNhan = input.nextLine();
         System.out.println("Nhập mật Khẩu cá nhân:");
         String matKhauCaNhan = input.nextLine();
-        for (TaiKhoan taiKhoan : taiKhoans) {
+        for (TaiKhoan taiKhoan : taiKhoans ) {
             if (taiKhoan.getTaiKhoan().equals(taiKhoanCaNhan)
                     && taiKhoan.getMatKhau().equals(matKhauCaNhan)) {
                 quanLyPhuongTien.hienThiCaNhan();

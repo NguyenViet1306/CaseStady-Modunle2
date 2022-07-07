@@ -24,7 +24,6 @@ public class TaiKhoan extends TaiKhoanQuanTri implements Serializable {
         this.bienSoXe = bienSoXe;
     }
 
-
     @Override
     public String toString() {
         return "TaiKhoan{" +
