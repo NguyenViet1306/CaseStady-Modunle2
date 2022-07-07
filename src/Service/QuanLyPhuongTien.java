@@ -186,10 +186,10 @@ public class QuanLyPhuongTien {
         System.out.println("Nhập màu của xe máy:");
         String mau = input.nextLine();
         xeMay.setMau(mau);
-        String bienSoXe = input.nextLine();
         System.out.println("Nhập biển số xe xe máy:");
+        String bienSoXe = input.nextLine();
         xeMay.setBienSoXe(bienSoXe);
-        System.out.println("Nhập vào động cơ của xe máy");
+        System.out.println("Nhập vào công suất của xe máy");
         String congSuat = input.nextLine();
         xeMay.setCongSuat(congSuat);
         docGhiFile.ghiXeMay(quanLyXeMay.getXeMays());
