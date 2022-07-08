@@ -21,7 +21,7 @@ public class QuanLyPhuongTien {
     private final QuanLyXeTai quanLyXeTai = new QuanLyXeTai();
     public Scanner input = new Scanner(System.in);
     private DocGhiFile docGhiFile = new DocGhiFile();
-
+    private int bienDem = 0;
     public QuanLyPhuongTien() {
 
         quanLyOto.setOtos(docGhiFile.docFileOto());
@@ -64,14 +64,13 @@ public class QuanLyPhuongTien {
         System.out.println("Nhập biển số xe Oto:");
         String bienSoXe = input.nextLine();
 
-        int bienDem = 0;
         while (kiemTraBienSoXe(bienSoXe)) {
             System.out.println("Biển số xe bị trùng");
             System.out.println("Nhập lại biển số xe Oto khác:");
             bienSoXe = input.nextLine();
             bienDem++;
-            if (bienDem == 3) {
-                System.out.println("Bạn đã nhập quá số lần quy định");
+            if (bienDem < 3) {
+                System.err.println("Bạn đã nhập quá số lần quy định");
                 break;
             }
         }
@@ -106,10 +105,16 @@ public class QuanLyPhuongTien {
         String mau = input.nextLine();
         System.out.println("Nhập biển số xe máy:");
         String bienSoXe = input.nextLine();
+
         while (kiemTraBienSoXe(bienSoXe)) {
             System.out.println("Biển số xe đã có.");
             System.out.println("Nhập biển số xe mới:");
             bienSoXe = input.nextLine();
+            bienDem++;
+            if (bienDem <3 ){
+                System.err.println("Bạn đã nhập quá số lần quy định!");
+                break;
+            }
         }
         System.out.println("Nhập vào công xuất của xe máy:");
         String congSuat = input.nextLine();
@@ -135,10 +140,16 @@ public class QuanLyPhuongTien {
         String mau = input.nextLine();
         System.out.println("Nhập biển số xe tải:");
         String bienSoXe = input.nextLine();
+
         while (kiemTraBienSoXe(bienSoXe)) {
             System.out.println("Biển số xe đã có.");
             System.out.println("Nhập biển số xe mới:");
             bienSoXe = input.nextLine();
+            bienDem++;
+            if (bienDem <3 ){
+                System.err.println("Bạn đã nhập quá số lần quy định!");
+                break;
+            }
         }
         System.out.println("Nhập vào tải trọng của xe tải:");
         String taiTrong = input.nextLine();
@@ -167,6 +178,16 @@ public class QuanLyPhuongTien {
         oto.setMau(mau);
         System.out.println("Nhập biển số xe Oto:");
         String bienSoXe = input.nextLine();
+        while (kiemTraBienSoXe(bienSoXe)) {
+            System.out.println("Biển số xe đã có\nNhập lại biển số xe:");
+            bienSoXe = input.nextLine();
+            bienDem++;
+            if (bienDem < 3){
+                System.err.println("Bạn đã nhập quá số lần quy định!");
+                break;
+            }
+
+        }
         oto.setBienSoXe(bienSoXe);
         System.out.println("Nhập vào động cơ của Oto");
         String dongCo = input.nextLine();
@@ -188,6 +209,15 @@ public class QuanLyPhuongTien {
         xeMay.setMau(mau);
         System.out.println("Nhập biển số xe xe máy:");
         String bienSoXe = input.nextLine();
+        while (kiemTraBienSoXe(bienSoXe)){
+            System.out.println("Biển số xe đã có\nNhapj lại biển số xe:");
+            bienSoXe = input.nextLine();
+            bienDem++;
+            if (bienDem < 3){
+                System.err.println("Bạn đã nhập quá số lần quy định!");
+                break;
+            }
+        }
         xeMay.setBienSoXe(bienSoXe);
         System.out.println("Nhập vào công suất của xe máy");
         String congSuat = input.nextLine();
@@ -208,6 +238,15 @@ public class QuanLyPhuongTien {
         xeTai.setMau(mau);
         System.out.println("Nhập biển số xe xe tải:");
         String bienSoXe = input.nextLine();
+        while (kiemTraBienSoXe(bienSoXe)){
+            System.out.println("Biển số xe đã có\nNhapj lại biển số xe:");
+            bienSoXe = input.nextLine();
+            bienDem++;
+            if (bienDem < 3){
+                System.err.println("Bạn đã nhập quá số lần quy định!");
+                break;
+            }
+        }
         xeTai.setBienSoXe(bienSoXe);
         System.out.println("Nhập vào tải trọng của xe tải");
         String taiTrong = input.nextLine();
@@ -348,7 +387,7 @@ public class QuanLyPhuongTien {
     public void hienThiCaNhan() {
         TaiKhoan taiKhoan = new TaiKhoan();
         for (PhuongTien pt : phuongTiens) {
-            if (pt.getBienSoXe().equals(taiKhoan.getBienSoXe())) {
+            if (taiKhoan.getBienSoXe().equals(pt.getBienSoXe())) {
                 System.out.println(pt);
             }
         }

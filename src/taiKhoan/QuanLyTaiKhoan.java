@@ -4,6 +4,7 @@ package taiKhoan;
 import Main.Menu;
 import Service.QuanLyPhuongTien;
 import docGhiFile.DocGhiFile;
+import object.PhuongTien;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -74,7 +75,7 @@ public class QuanLyTaiKhoan {
     }
 
     public void dangNhapTaiKhoan() {
-        QuanLyPhuongTien quanLyPhuongTien = new QuanLyPhuongTien();
+        Menu menu = new Menu();
         docGhiFile.docTaiKhoan();
         System.out.println("Nhập tài khoản cá nhân:");
         String taiKhoanCaNhan = input.nextLine();
@@ -83,7 +84,7 @@ public class QuanLyTaiKhoan {
         for (TaiKhoan taiKhoan : taiKhoans ) {
             if (taiKhoan.getTaiKhoan().equals(taiKhoanCaNhan)
                     && taiKhoan.getMatKhau().equals(matKhauCaNhan)) {
-                quanLyPhuongTien.hienThiCaNhan();
+                menu.menuCaNhanThuHai();
             }
         }
     }

@@ -279,5 +279,12 @@ public class Menu {
         System.out.println("------------------------------------------");
     }
 
+    public void menuCaNhanThuHai() {
+        System.out.println("-----------------------------------------------");
+        System.out.println("|          Chức Năng Chưa Hoàn Thiện,         |");
+        System.out.println("|          Xin Vui Lòng Quay Lại Sau!         |");
+        System.out.println("|          Xin Trân Thành Cảm Ơn!             |");
+        System.out.println("-----------------------------------------------");
+    }
 
 }
